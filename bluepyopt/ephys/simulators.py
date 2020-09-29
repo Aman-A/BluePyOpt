@@ -68,7 +68,7 @@ class NrnSimulator(object):
         nrnpy_path = os.path.join(imp.find_module('neuron')[1])
         import glob
         hoc_so_list = \
-            glob.glob(os.path.join(nrnpy_path, 'hoc*.so'))
+            glob.glob(os.path.join(nrnpy_path, 'hoc*37*.so')) # hoc*37m-darwin.so
 
         if len(hoc_so_list) != 1:
             warnings.warn('Unable to find Neuron hoc shared library in %s, '
