@@ -144,18 +144,21 @@ class CellModel(Model):
             seclist_names=None,
             secarray_names=None):
         '''create an hoc template named template_name for an empty cell'''
-
         objref_str = 'objref this, CellRef'
+        public_str = 'public all'
         newseclist_str = ''
 
         if seclist_names:
             for seclist_name in seclist_names:
                 objref_str += ', %s' % seclist_name
+                public_str += ', %s' % seclist_name
                 newseclist_str += \
                     '             %s = new SectionList()\n' % seclist_name
 
         create_str = ''
         if secarray_names:
+            for secarray_name in secarray_names:
+                public_str += ', %s' % secarray_name
             create_str = 'create '
             create_str += ', '.join(
                 '%s[1]' % secarray_name
@@ -165,6 +168,7 @@ class CellModel(Model):
         template = '''\
         begintemplate %(template_name)s
           %(objref_str)s
+          %(public_str)s
           proc init() {\n%(newseclist_str)s
             forall delete_section()
             CellRef = this
@@ -180,7 +184,7 @@ class CellModel(Model):
         endtemplate %(template_name)s
                ''' % dict(template_name=template_name, objref_str=objref_str,
                           newseclist_str=newseclist_str,
-                          create_str=create_str)
+                          create_str=create_str,public_str=public_str)
 
         return template
 
@@ -228,6 +232,10 @@ class CellModel(Model):
         if self.params is not None:
             for param in self.params.values():
                 param.instantiate(sim=sim, icell=self.icell)
+
+        logger.info('Total nseg = %d',
+             sum([sec.nseg for sec in self.icell.all]))
+
 
     def destroy(self, sim=None):  # pylint: disable=W0613
         """Destroy instantiated model in simulator"""

@@ -26,6 +26,7 @@ import random
 import logging
 import shutil
 import os
+from datetime import datetime
 
 import deap.algorithms
 import deap.tools
@@ -144,6 +145,8 @@ def eaAlphaMuPlusLambdaCheckpoint(
     gen = start_gen + 1
     stopping_params = {"gen": gen}
     while not(_check_stopping_criteria(stopping_criteria, stopping_params)):
+        start_time = datetime.now()
+        logger.info('Starting generation at %s...', start_time)
         offspring = _get_offspring(parents, toolbox, cxpb, mutpb)
 
         population = parents + offspring
@@ -156,7 +159,7 @@ def eaAlphaMuPlusLambdaCheckpoint(
         parents = toolbox.select(population, mu)
 
         logger.info(logbook.stream)
-
+        logger.info('Finished generation at %s. Time elapsed is %s', datetime.now(), datetime.now() - start_time)
         if(cp_filename and cp_frequency and
            gen % cp_frequency == 0):
             cp = dict(population=population,
