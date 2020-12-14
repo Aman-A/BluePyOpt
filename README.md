@@ -33,7 +33,9 @@
   <td>Build Status</td>
   <td>
     <a href="https://travis-ci.com/BlueBrain/BluePyOpt">
-    <img src="https://travis-ci.com/BlueBrain/BluePyOpt.svg?branch=master" alt="travis build status" />
+    <img src="https://travis-ci.com/BlueBrain/BluePyOpt.svg?branch=master" alt="travis build status" />    
+    <a href="https://github.com/BlueBrain/BluePyOpt/actions">
+    <img src="https://github.com/BlueBrain/BluePyOpt/workflows/Run%20BluePyOpt%20tox/badge.svg?branch=master" alt="Actions build status" />
     </a>
   </td>
 </tr>
@@ -94,7 +96,7 @@ ISSN={1662-5196}
 ```
 Support
 =======
-We are providing support using a chat channel on [Gitter](https://gitter.im/BlueBrain/BluePyOpt).
+We are providing support using a chat channel on [Gitter](https://gitter.im/BlueBrain/BluePyOpt), or the [Github discussion page](https://github.com/BlueBrain/BluePyOpt/discussions).
 
 News
 ====
